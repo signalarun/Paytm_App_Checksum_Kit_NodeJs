@@ -76,7 +76,7 @@ function route(request,response){
 		case '/prepare_order':
 			/*
 			 Preparing a new order. This takes list of cart items and gives the unique Order ID
-			 that needs to be sent to PayTM
+			 that needs to be sent to PayTM.
 			*/
 				if(request.method == 'POST'){
 					var fullBody = '';
