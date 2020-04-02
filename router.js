@@ -72,6 +72,54 @@ function route(request,response){
 				response.end();
 			}
 			break;
+			
+		case '/prepare_order':
+			/*
+			 Preparing a new order. This takes list of cart items and gives the unique Order ID
+			 that needs to be sent to PayTM
+			*/
+				if(request.method == 'POST'){
+					var fullBody = '';
+					request.on('data', function(chunk) {
+						fullBody += chunk.toString();
+					});
+					request.on('end', function() {
+						var decodedBody = querystring.parse(fullBody);
+            					console.log(decodedBody);
+						// TODO implement the function to generate unique order ID for the current items
+            					response.writeHead(200, {'Content-type' : 'text/html','Cache-Control': 'no-cache'});
+
+						response.end();
+					});
+				}else{
+					response.writeHead(200, {'Content-type' : 'text/json'});
+					response.end();
+				}
+				break;
+		 case '/transaction_status':
+				/*
+				 Verifies the transaction status once the payment is done. This involves
+				 backend server making call to PayTM server and
+				 verifies the transaction
+				*/
+					if(request.method == 'POST'){
+						var fullBody = '';
+						request.on('data', function(chunk) {
+							fullBody += chunk.toString();
+						});
+						request.on('end', function() {
+							var decodedBody = querystring.parse(fullBody);
+							console.log(decodedBody);
+							// TODO Backend server making call to PayTM server to verify transaction status
+							response.writeHead(200, {'Content-type' : 'text/html','Cache-Control': 'no-cache'});
+
+							response.end();
+						});
+					}else{
+						response.writeHead(200, {'Content-type' : 'text/json'});
+						response.end();
+					}
+				break;	
 	}	
 }
 
